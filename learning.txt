@@ -1,0 +1,1 @@
+analyse of linux filesystem : http://blog.csdn.net/dndxhej/article/details/7426309
