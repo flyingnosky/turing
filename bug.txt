@@ -1,0 +1,39 @@
+void sas_unregister_dev(struct asd_sas_port *port, struct domain_device *dev)
+{
+    pr_info("%s, cpu=%d\n", __func__, smp_processor_id());   
+#if 0 /* c00308265, fixed to me, destroy device immediately */
+ if (!test_bit(SAS_DEV_DESTROY, &dev->state) &&
+     !list_empty(&dev->disco_list_node)) {
+      pr_info("%s, BBBBB cpu=%d\n", __func__, smp_processor_id());   
+  /* this rphy never saw sas_rphy_add */
+  list_del_init(&dev->disco_list_node);
+  sas_rphy_free(dev->rphy);
+  sas_unregister_common_dev(port, dev);
+  return;
+ }
+
+
+ if (!test_and_set_bit(SAS_DEV_DESTROY, &dev->state)) {
+         pr_info("%s, CCCCC cpu=%d\n", __func__, smp_processor_id());   
+  sas_rphy_unlink(dev->rphy);
+  list_move_tail(&dev->disco_list_node, &port->destroy_list);
+  sas_discover_event(dev->port, DISCE_DESTRUCT);
+ }
+#else
+ struct sas_port *sas_port = dev_to_sas_port(dev->rphy->dev.parent);
+    pr_info("sas_unregister_dev>>>>sas_port: %p\n", sas_port);
+
+
+    sas_rphy_unlink(dev->rphy);
+
+
+ sas_remove_children(&dev->rphy->dev);
+ sas_rphy_delete(dev->rphy);
+ sas_unregister_common_dev(port, dev);
+ //sas_port_delete(sas_port);
+
+
+#endif
+}
+
+https://bugzilla.redhat.com/show_bug.cgi?id=1030988
