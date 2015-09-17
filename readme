@@ -1,0 +1,26 @@
+//README
+
+Howto use:
+0. Compile wendyfs module
+   $make
+
+1. Insert wendyfs module
+	#insmod wendyfs.ko
+2. Check the filesystem list
+	#cat /proc/filesystems
+	...
+	nodev	wendyfs
+3. Mount the wendyfs 
+	#mount -t wendyfs none /mnt
+4. Create a dir in the mount point
+	#cd /mnt
+	#mkdir hello
+5. Delete the hello dir
+	#rm -rf hello
+6. Create a file and rename it
+	#echo "hello" > halo
+	#cat halo
+	#mv halo hello
+	mv: cannot move `halo' to `hello': Operation
+	not permitted
+	...
