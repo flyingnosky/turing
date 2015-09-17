@@ -1,0 +1,1 @@
+cmd_/home/chenxiang/workspace/github/turing/example.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.13.0-32-generic/scripts/module-common.lds --build-id  -o /home/chenxiang/workspace/github/turing/example.ko /home/chenxiang/workspace/github/turing/example.o /home/chenxiang/workspace/github/turing/example.mod.o
