@@ -1,0 +1,27 @@
+AutoComplPop
+step1: Download source codes from following website:
+	http://www.vim.org/scripts/script.php?script_id=1879 
+step2: unzip source code and get filefold autoload/ and plugin/
+step3: move those files to ~/.vim/ 
+	autoload/* -------------> ~/.vim/autoload/ 
+	plugin/*   -------------> ~/.vim/plugin/ 
+
+OmniCppComplete
+step1: Download source codes from following website:
+	http://www.vim.org/scripts/script.php?script_id=1520
+step2: unzip source code to directory ~/.vim/ 
+	autoload/* -------------------> ~/.vim/autoload/ 
+	after/*    -------------------> ~/.vim/after/ 
+step3: add some setting in ~/.vimrc 
+		     set completeopt=menu,menuone  
+                     let OmniCpp_MayCompleteDot=1    “  打开  . 操作符
+                     let OmniCpp_MayCompleteArrow=1  "打开 -> 操作符
+                     let OmniCpp_MayCompleteScope=1  ”打开 :: 操作符
+                     let OmniCpp_NamespaceSearch=1   “打开命名空间
+                     let OmniCpp_GlobalScopeSearch=1  
+                     let OmniCpp_DefaultNamespace=["std"]  
+                     let OmniCpp_ShowPrototypeInAbbr=1  “打开显示函数原型
+                     let OmniCpp_SelectFirstItem = 2”自动弹出时自动跳至第一个
+step4: lead omnicppcomplete to find tags, modify ~/.vimrc 
+	set tags+=/home/chenxiang/kernel-dev/tags
+
